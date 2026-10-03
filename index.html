@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Captain Arpit — A Pirate's Tale</title>
+  <meta name="description" content="Ahoy! Welcome aboard — this be the personal log of Captain Arpit. Discover the voyage, the treasures, and the legend." />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="alternate icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏴‍☠️</text></svg>" />
+  <link rel="manifest" href="site.webmanifest" />
+
+  <!-- Google Fonts — Pirate & old-world typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;500;600;700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet" />
+
+  <!-- Theme Stylesheet -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Floating particles canvas -->
+  <canvas id="particles-canvas"></canvas>
+
+  <!-- ==================== NAVIGATION ==================== -->
+  <nav class="nav" id="nav">
+    <div class="container nav__inner">
+      <a href="#" class="nav__logo">☠ Captain Arpit</a>
+      <ul class="nav__links" id="navLinks">
+        <li><a href="#mapnav">Map</a></li>
+        <li><a href="#about" class="active">The Captain</a></li>
+        <li><a href="#skills">Treasures</a></li>
+        <li><a href="#voyage">Future Plan</a></li>
+        <li><a href="#crew">Crew</a></li>
+        <li><a href="#contact">Message</a></li>
+      </ul>
+      <button class="nav__hamburger" id="hamburger" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="nav__mobile" id="mobileMenu">
+      <a href="#mapnav">Treasure Map</a>
+      <a href="#about">The Captain</a>
+      <a href="#skills">Treasures</a>
+      <a href="#voyage">Future Plan</a>
+      <a href="#treasures">Gallery</a>
+      <a href="#code">Pirate Code</a>
+      <a href="#crew">Crew's Network</a>
+      <a href="#contact">Message</a>
+    </div>
+  </nav>
+
+  <!-- ==================== HERO ==================== -->
+  <section class="hero" id="hero">
+    <div class="hero__bg">
+      <img src="images/hero.jpg" alt="Pirate galleon sailing stormy seas at sunset" />
+    </div>
+    <div class="hero__overlay"></div>
+
+    <div class="container hero__content">
+      <div class="hero__skull">🏴‍☠️</div>
+      <p class="hero__subtitle-top">Welcome Aboard, Sailor</p>
+      <h1 class="hero__title">Captain Arpit</h1>
+      <p class="hero__tagline">
+        "Not all treasure is silver and gold, mate."<br />
+        — Captain Jack Sparrow
+      </p>
+      <div class="hero__actions">
+        <a href="#about" class="btn btn-gold">
+          Read Me Tale
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14"/><path d="m19 12-7 7-7-7"/></svg>
+        </a>
+        <a href="#contact" class="btn btn-outline">Send a Bottle</a>
+      </div>
+    </div>
+
+    <div class="hero__scroll">
+      <span>Set Sail</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ==================== TREASURE MAP NAVIGATION ==================== -->
+  <section class="mapnav section-pad" id="mapnav">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-label">Chart Yer Course</p>
+        <h2 class="section-title">The Treasure Map</h2>
+        <div class="section-ornament">🗺️</div>
+      </div>
+
+      <div class="mapnav__wrapper reveal">
+        <img class="mapnav__img" src="images/map.jpg" alt="Interactive treasure map for navigation" />
+
+        <!-- Hotspot: The Captain (About) — top-left island area -->
+        <a href="#about" class="mapnav__hotspot" style="top: 26%; left: 18%;">
+          <div class="mapnav__beacon"><span class="mapnav__beacon-icon">⚓</span></div>
+          <span class="mapnav__label">The Captain</span>
+        </a>
+
+        <!-- Hotspot: Treasures (Skills) — center skull/X mark -->
+        <a href="#skills" class="mapnav__hotspot" style="top: 32%; left: 42%;">
+          <div class="mapnav__beacon"><span class="mapnav__beacon-icon">💰</span></div>
+          <span class="mapnav__label">Skills & Loot</span>
+        </a>
+
+        <!-- Hotspot: Future Plan — right-side island -->
+        <a href="#voyage" class="mapnav__hotspot" style="top: 20%; left: 68%;">
+          <div class="mapnav__beacon"><span class="mapnav__beacon-icon">🧭</span></div>
+          <span class="mapnav__label">Future Plan</span>
+        </a>
+
+        <!-- Hotspot: Gallery — bottom-left sea area -->
+        <a href="#treasures" class="mapnav__hotspot" style="top: 68%; left: 22%;">
+          <div class="mapnav__beacon"><span class="mapnav__beacon-icon">🗝️</span></div>
+          <span class="mapnav__label">Gallery</span>
+        </a>
+
+        <!-- Hotspot: Pirate Code — bottom-center -->
+        <a href="#code" class="mapnav__hotspot" style="top: 62%; left: 50%;">
+          <div class="mapnav__beacon"><span class="mapnav__beacon-icon">📜</span></div>
+          <span class="mapnav__label">Pirate Code</span>
+        </a>
+
+        <!-- Hotspot: Crew's Network — bottom-right ship -->
+        <a href="#crew" class="mapnav__hotspot" style="top: 72%; left: 78%;">
+          <div class="mapnav__beacon"><span class="mapnav__beacon-icon">⛵</span></div>
+          <span class="mapnav__label">Crew's Network</span>
+        </a>
+
+        <!-- Hotspot: Contact — compass rose area (top-right) -->
+        <a href="#contact" class="mapnav__hotspot" style="top: 15%; left: 88%;">
+          <div class="mapnav__beacon"><span class="mapnav__beacon-icon">🍾</span></div>
+          <span class="mapnav__label">Send a Bottle</span>
+        </a>
+      </div>
+
+      <!-- Legend / Quick links below the map -->
+      <div class="mapnav__legend reveal">
+        <a href="#about" class="mapnav__legend-item"><span>⚓</span> The Captain</a>
+        <a href="#skills" class="mapnav__legend-item"><span>💰</span> Skills & Loot</a>
+        <a href="#voyage" class="mapnav__legend-item"><span>🧭</span> Future Plan</a>
+        <a href="#treasures" class="mapnav__legend-item"><span>🗝️</span> Gallery</a>
+        <a href="#code" class="mapnav__legend-item"><span>📜</span> Pirate Code</a>
+        <a href="#crew" class="mapnav__legend-item"><span>⛵</span> Crew's Network</a>
+        <a href="#contact" class="mapnav__legend-item"><span>🍾</span> Message</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================== -->
+  <!-- 🏴‍☠️ >>> [EDIT "ABOUT MYSELF" SECTION BELOW] <<< 🏴‍☠️                         -->
+  <!-- Feel free to change your greeting, quote, biography, and stats here!        -->
+  <!-- ========================================================================== -->
+  <section class="about section-pad" id="about">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-label">The Captain's Quarters</p>
+        <h2 class="section-title">About Me</h2>
+        <div class="section-ornament">⚓</div>
+      </div>
+
+      <div class="about__grid">
+        <div class="about__img-wrapper reveal">
+          <img src="images/compass.jpg" alt="Vintage pirate compass on wooden desk" />
+        </div>
+
+        <div class="about__text-group reveal">
+          <!-- ✏️ EDIT YOUR TITLE / GREETING HERE: -->
+          <h2>Ahoy! I Be Captain Arpit</h2>
+
+          <!-- ✏️ EDIT YOUR FAVORITE PIRATE QUOTE / MOTTO HERE: -->
+          <p class="about__quote">
+            "The problem is not the problem. The problem is your attitude about the problem. Do you understand?"
+          </p>
+
+          <!-- ✏️ EDIT YOUR BIOGRAPHY & PERSONAL STORY HERE: -->
+          <p class="about__bio">
+            A fearless navigator of the digital seas, I chart courses through uncharted waters of code and creativity. By day I command a fleet of pixels and algorithms; by night I explore the vast oceans of knowledge, always seeking the next horizon.
+            <br /><br />
+            Much like the legendary Captain Jack Sparrow, I believe in following your compass — not the one that points north, but the one that points to what you truly want. My compass has led me through storms of debugging, islands of design, and the treasure-rich shores of innovation.
+          </p>
+
+          <!-- ✏️ EDIT YOUR STATS & NUMBERS HERE: -->
+          <div class="about__stats reveal-stagger">
+            <div class="about__stat">
+              <div class="about__stat-number">3</div>
+              <div class="about__stat-label">Voyages (Projects)</div>
+            </div>
+            <div class="about__stat">
+              <div class="about__stat-number">4 Mos</div>
+              <div class="about__stat-label">Time at Sea</div>
+            </div>
+            <div class="about__stat">
+              <div class="about__stat-number">∞</div>
+              <div class="about__stat-label">Curiosity</div>
+            </div>
+          </div>
+
+          <a href="#voyage" class="btn btn-gold">
+            View Future Plan
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ========================================================================== -->
+  <!-- 🏴‍☠️ >>> [END OF "ABOUT MYSELF" SECTION] <<< 🏴‍☠️                             -->
+  <!-- ========================================================================== -->
+
+  <!-- ==================== SKILLS / TREASURE ==================== -->
+  <section class="skills section-pad" id="skills">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-label">The Treasure Chest</p>
+        <h2 class="section-title">Me Skills & Loot</h2>
+        <div class="section-ornament">💰</div>
+      </div>
+
+      <p class="skills__intro reveal">
+        Every pirate has their plunder — here be the skills I'm forging and plundering as I sail the seven seas of technology and computer science.
+      </p>
+
+      <div class="skills__grid reveal-stagger">
+        <div class="skill-card">
+          <div class="skill-card__icon">⚔️</div>
+          <h3 class="skill-card__title">C & C++ Programming</h3>
+          <p class="skill-card__desc">Mastering low-level logic, pointers, memory management, and algorithmic problem-solving. Currently learning!</p>
+          <div class="skill-bar"><div class="skill-bar__fill" data-width="80"></div></div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-card__icon">🌐</div>
+          <h3 class="skill-card__title">HTML5 & CSS3</h3>
+          <p class="skill-card__desc">Commanding responsive layouts, semantic structure, and pirate aesthetics with flair. Currently learning!</p>
+          <div class="skill-bar"><div class="skill-bar__fill" data-width="85"></div></div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-card__icon">🧭</div>
+          <h3 class="skill-card__title">Problem Solving</h3>
+          <p class="skill-card__desc">Navigating the stormiest bugs and the trickiest logic puzzles with cunning and resolve.</p>
+          <div class="skill-bar"><div class="skill-bar__fill" data-width="95"></div></div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-card__icon">🐍</div>
+          <h3 class="skill-card__title">Python Programming</h3>
+          <p class="skill-card__desc">Next grand territory on me radar — planning to learn for automation, scripts, and software logic.</p>
+          <div class="skill-bar"><div class="skill-bar__fill" data-width="30"></div></div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-card__icon">🔱</div>
+          <h3 class="skill-card__title">Creative Thinking</h3>
+          <p class="skill-card__desc">Thinking outside the treasure chest — innovation that would make Davy Jones jealous.</p>
+          <div class="skill-bar"><div class="skill-bar__fill" data-width="90"></div></div>
+        </div>
+
+        <div class="skill-card">
+          <div class="skill-card__icon">⛵</div>
+          <h3 class="skill-card__title">Team Leadership</h3>
+          <p class="skill-card__desc">Every captain needs a loyal crew — rallying teams towards shared treasure and glory.</p>
+          <div class="skill-bar"><div class="skill-bar__fill" data-width="82"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FUTURE PLAN / ROADMAP ==================== -->
+  <section class="voyage section-pad" id="voyage">
+    <div class="voyage__parallax">
+      <img src="images/map.jpg" alt="Treasure map background" />
+    </div>
+    <div class="container" style="position:relative; z-index:1;">
+      <div class="section-header reveal">
+        <p class="section-label">Captain's Future Roadmap</p>
+        <h2 class="section-title">Plan for the Future</h2>
+        <div class="section-ornament">🧭</div>
+      </div>
+
+      <!-- Currently Learning Spotlight Banner -->
+      <div class="voyage__learning-banner reveal" style="max-width: 840px; margin: 0 auto var(--sp-xl); background: linear-gradient(135deg, rgba(212,168,67,0.12), rgba(22,32,56,0.85)); border: 2px solid var(--gold); border-radius: var(--radius); padding: var(--sp-md) var(--sp-lg); text-align: center; box-shadow: 0 0 30px rgba(212,168,67,0.15);">
+        <p style="font-family: var(--ff-heading); font-size: 0.72rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px;">⚡ Current Coordinates & Future Targets</p>
+        <h3 style="font-family: var(--ff-pirate); font-size: 1.85rem; color: var(--gold-bright); margin-bottom: 12px; letter-spacing: 0.05em;">Languages Navigated & Charted</h3>
+
+        <!-- Currently Learning -->
+        <div style="margin-bottom: 14px;">
+          <div style="font-family: var(--ff-heading); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--parchment-dark); margin-bottom: 8px;">⚓ Currently Learning:</div>
+          <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
+            <span style="display: inline-flex; align-items: center; gap: 6px; background: rgba(15,22,40,0.9); border: 1px solid var(--gold); color: var(--gold-bright); padding: 7px 18px; border-radius: 20px; font-family: var(--ff-heading); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; box-shadow: 0 4px 14px rgba(0,0,0,0.4);">💻 C Language</span>
+            <span style="display: inline-flex; align-items: center; gap: 6px; background: rgba(15,22,40,0.9); border: 1px solid var(--gold); color: var(--gold-bright); padding: 7px 18px; border-radius: 20px; font-family: var(--ff-heading); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; box-shadow: 0 4px 14px rgba(0,0,0,0.4);">⚙️ C++</span>
+            <span style="display: inline-flex; align-items: center; gap: 6px; background: rgba(15,22,40,0.9); border: 1px solid var(--gold); color: var(--gold-bright); padding: 7px 18px; border-radius: 20px; font-family: var(--ff-heading); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; box-shadow: 0 4px 14px rgba(0,0,0,0.4);">🌐 HTML</span>
+            <span style="display: inline-flex; align-items: center; gap: 6px; background: rgba(15,22,40,0.9); border: 1px solid var(--gold); color: var(--gold-bright); padding: 7px 18px; border-radius: 20px; font-family: var(--ff-heading); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; box-shadow: 0 4px 14px rgba(0,0,0,0.4);">🎨 CSS</span>
+          </div>
+        </div>
+
+        <!-- Planning to Learn -->
+        <div style="margin-bottom: 10px;">
+          <div style="font-family: var(--ff-heading); font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold-bright); margin-bottom: 8px;">🗺️ Planning to Learn:</div>
+          <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
+            <span style="display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, rgba(46,31,16,0.95), rgba(15,22,40,0.95)); border: 1.5px dashed var(--gold-bright); color: var(--gold-bright); padding: 7px 22px; border-radius: 20px; font-family: var(--ff-heading); font-size: 0.88rem; font-weight: 700; letter-spacing: 0.08em; box-shadow: 0 0 18px rgba(212,168,67,0.3);">
+              🐍 Python
+              <span style="font-size: 0.65rem; background: var(--gold); color: var(--ocean-deep); padding: 2px 8px; border-radius: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;">Next Target</span>
+            </span>
+          </div>
+        </div>
+
+        <p style="font-size: 0.95rem; color: var(--parchment); margin-top: 14px; line-height: 1.7;">
+          With <strong>4 months at sea</strong> and <strong>3 voyages (projects)</strong> completed, I am currently mastering low-level systems programming in <strong>C & C++</strong> alongside frontend craft in <strong>HTML & CSS</strong> — with <strong>Python</strong> charted as the next grand territory to learn for backend power and automation!
+        </p>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline__item reveal">
+          <div class="timeline__marker"><div class="timeline__marker-dot"></div></div>
+          <div class="timeline__content">
+            <div class="timeline__year">Phase 1 • Current Port (First 4 Months)</div>
+            <h3 class="timeline__event-title">⚓ Rigging the Keel — C, C++, HTML & CSS Foundations</h3>
+            <p class="timeline__event-desc">Laying an ironclad foundation of computer science. Currently exploring syntax, pointers, memory allocation, and algorithmic logic in C/C++, paired with building responsive web interfaces and pirate aesthetics with HTML & CSS. 3 voyages successfully anchored!</p>
+          </div>
+        </div>
+
+        <div class="timeline__item reveal">
+          <div class="timeline__marker"><div class="timeline__marker-dot"></div></div>
+          <div class="timeline__content">
+            <div class="timeline__year">Phase 2 • Upcoming Waters</div>
+            <h3 class="timeline__event-title">🌊 Conquering DSA & Setting Course for Python</h3>
+            <p class="timeline__event-desc">Mastering Data Structures and Algorithms in C++ while setting course to learn Python. Harnessing Python for rapid scripting, algorithm experimentation, and backend automation to weather any technical challenge.</p>
+          </div>
+        </div>
+
+        <div class="timeline__item reveal">
+          <div class="timeline__marker"><div class="timeline__marker-dot"></div></div>
+          <div class="timeline__content">
+            <div class="timeline__year">Phase 3 • New Horizons</div>
+            <h3 class="timeline__event-title">🏝️ Interactive Systems & Modern Web Craft</h3>
+            <p class="timeline__event-desc">Combining low-level programming prowess with dynamic web applications. Expanding beyond static web design into modern JavaScript, APIs, and backend architectures to build full-scale digital vessels.</p>
+          </div>
+        </div>
+
+        <div class="timeline__item reveal">
+          <div class="timeline__marker"><div class="timeline__marker-dot"></div></div>
+          <div class="timeline__content">
+            <div class="timeline__year">Phase 4 • Plundering the Riches</div>
+            <h3 class="timeline__event-title">💰 Production-Grade Projects & Open Source Crews</h3>
+            <p class="timeline__event-desc">Constructing high-impact portfolio projects that solve real-world problems. Collaborating with developer crews across the globe on open-source repositories and expanding me GitHub treasures.</p>
+          </div>
+        </div>
+
+        <div class="timeline__item reveal">
+          <div class="timeline__marker"><div class="timeline__marker-dot"></div></div>
+          <div class="timeline__content">
+            <div class="timeline__year">Phase 5 • The Grand Horizon</div>
+            <h3 class="timeline__event-title">🌅 Full Software Engineering & Industry Impact</h3>
+            <p class="timeline__event-desc">Charting the ultimate course as a versatile Software Engineer — equipped with both low-level algorithmic mastery and full-stack building skills to conquer the high seas of the tech industry.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== TREASURES GALLERY ==================== -->
+  <section class="treasures section-pad" id="treasures">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-label">Gallery of Plunder</p>
+        <h2 class="section-title">Me Favourite Treasures</h2>
+        <div class="section-ornament">🗝️</div>
+      </div>
+
+      <div class="treasures__grid reveal-stagger">
+        <div class="treasure-card">
+          <img src="images/hero.jpg" alt="Pirate ship at sea" loading="lazy" />
+          <div class="treasure-card__overlay">
+            <span class="treasure-card__tag">Adventure</span>
+            <span class="treasure-card__name">The High Seas</span>
+          </div>
+        </div>
+
+        <div class="treasure-card">
+          <img src="images/treasure.jpg" alt="Treasure chest full of gold" loading="lazy" />
+          <div class="treasure-card__overlay">
+            <span class="treasure-card__tag">Reward</span>
+            <span class="treasure-card__name">The Loot</span>
+          </div>
+        </div>
+
+        <div class="treasure-card">
+          <img src="images/compass.jpg" alt="Brass compass and nautical tools" loading="lazy" />
+          <div class="treasure-card__overlay">
+            <span class="treasure-card__tag">Navigation</span>
+            <span class="treasure-card__name">Jack's Compass</span>
+          </div>
+        </div>
+
+        <div class="treasure-card">
+          <img src="images/map.jpg" alt="Ancient treasure map" loading="lazy" />
+          <div class="treasure-card__overlay">
+            <span class="treasure-card__tag">Discovery</span>
+            <span class="treasure-card__name">The Map</span>
+          </div>
+        </div>
+
+        <div class="treasure-card">
+          <img src="images/harbor.jpg" alt="Pirate harbor at night" loading="lazy" />
+          <div class="treasure-card__overlay">
+            <span class="treasure-card__tag">Home Port</span>
+            <span class="treasure-card__name">Tortuga</span>
+          </div>
+        </div>
+
+        <div class="treasure-card">
+          <img src="images/hero.jpg" alt="Sunset voyage" loading="lazy" style="object-position: top;" />
+          <div class="treasure-card__overlay">
+            <span class="treasure-card__tag">Freedom</span>
+            <span class="treasure-card__name">The Sunset Sail</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== PIRATE CODE ==================== -->
+  <section class="code section-pad" id="code">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-label">Sacred Oath</p>
+        <h2 class="section-title">The Pirate Code</h2>
+        <div class="section-ornament">📜</div>
+      </div>
+
+      <div class="code__scroll reveal">
+        <ul class="code__list">
+          <li class="code__item">
+            <div class="code__number"></div>
+            <p class="code__text"><strong>Never stop learning.</strong> — The sea is vast, and there are always new waters to chart. Stagnation is the true enemy.</p>
+          </li>
+          <li class="code__item">
+            <div class="code__number"></div>
+            <p class="code__text"><strong>Write clean code.</strong> — A ship that's well-maintained weathers any storm. Messy rigging leads to disaster.</p>
+          </li>
+          <li class="code__item">
+            <div class="code__number"></div>
+            <p class="code__text"><strong>Fail forward.</strong> — Every shipwreck teaches you how to build a better vessel. Fear of failure is mutiny against progress.</p>
+          </li>
+          <li class="code__item">
+            <div class="code__number"></div>
+            <p class="code__text"><strong>Share the treasure.</strong> — Knowledge hoarded is treasure buried and forgotten. Teach, mentor, and lift others up.</p>
+          </li>
+          <li class="code__item">
+            <div class="code__number"></div>
+            <p class="code__text"><strong>Stay curious.</strong> — The compass that points to what you want most will never lead you astray. Follow it relentlessly.</p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CONTACT ==================== -->
+  <section class="contact section-pad" id="contact">
+    <div class="contact__bg">
+      <img src="images/harbor.jpg" alt="Pirate harbor background" />
+    </div>
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-label">Message in a Bottle</p>
+        <h2 class="section-title">Send Word, Sailor</h2>
+        <div class="section-ornament">🍾</div>
+      </div>
+
+      <div class="contact__inner">
+        <div class="contact__info reveal">
+          <h2>Drop Anchor & Say Ahoy!</h2>
+          <p class="contact__info-text">
+            "Wherever we want to go, we go. That's what a ship is, you know. It's not just a keel and a hull and sails — that's what a ship needs. Not what a ship is."
+          </p>
+
+          <div class="contact__detail">
+            <div class="contact__detail-icon">🏴‍☠️</div>
+            <div>
+              <p class="contact__detail-label">Home Port</p>
+              <p class="contact__detail-value">The Caribbean (India)</p>
+            </div>
+          </div>
+
+          <div class="contact__detail">
+            <div class="contact__detail-icon">📧</div>
+            <div>
+              <p class="contact__detail-label">Pigeon Post</p>
+              <p class="contact__detail-value"><a href="mailto:arpit.kumar24826@gmail.com" style="color:inherit; text-decoration: underline;">arpit.kumar24826@gmail.com</a></p>
+            </div>
+          </div>
+
+          <div class="contact__detail">
+            <div class="contact__detail-icon">🦜</div>
+            <div>
+              <p class="contact__detail-label">Parrot Wire</p>
+              <p class="contact__detail-value">Captain Arpit</p>
+            </div>
+          </div>
+
+          <!-- ⚓ SOCIAL PROFILE ICONS -->
+          <div class="contact__socials">
+            <!-- 🐙 1. GitHub Profile Link -->
+            <a href="https://github.com/ArpitzzKumar" target="_blank" rel="noopener noreferrer" class="contact__social" aria-label="GitHub">🐙</a>
+            <!-- ⚓ 2. LinkedIn Profile Link -->
+            <a href="https://www.linkedin.com/in/arpit-kumar-b3356942b" target="_blank" rel="noopener noreferrer" class="contact__social" aria-label="LinkedIn">⚓</a>
+            <!-- 📸 3. Instagram Profile Link -->
+            <a href="https://www.instagram.com/invites/contact/?utm_source=ig_contact_invite&utm_medium=copy_link&utm_content=71c1ulu" target="_blank" rel="noopener noreferrer" class="contact__social" aria-label="Instagram">📸</a>
+            <!-- 📧 4. Gmail Missive Link -->
+            <a href="mailto:arpit.kumar24826@gmail.com" class="contact__social" aria-label="Gmail">📧</a>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <form class="contact__form" id="contactForm">
+            <div class="form__row">
+              <div class="form__group">
+                <label class="form__label" for="pirName">Yer Name, Sailor</label>
+                <input class="form__input" type="text" id="pirName" placeholder="Jack Sparrow" required />
+              </div>
+              <div class="form__group">
+                <label class="form__label" for="pirEmail">Pigeon Address</label>
+                <input class="form__input" type="email" id="pirEmail" placeholder="jack@blackpearl.sea" required />
+              </div>
+            </div>
+
+            <div class="form__group">
+              <label class="form__label" for="pirSubject">Subject of Yer Missive</label>
+              <input class="form__input" type="text" id="pirSubject" placeholder="A proposition…" />
+            </div>
+
+            <div class="form__group">
+              <label class="form__label" for="pirMessage">Yer Message</label>
+              <textarea class="form__textarea" id="pirMessage" placeholder="Speak yer mind, sailor. What treasure do ye seek?" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-gold form__submit" id="submitBtn">
+              Send the Bottle
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </button>
+          </form>
+
+          <div class="form__success" id="formSuccess">
+            <div class="form__success-icon">🍾</div>
+            <h3>Message Cast to Sea!</h3>
+            <p>Yer bottle has been launched. The Captain shall respond when the tides allow.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CREW'S NETWORK — Social Links ==================== -->
+  <section class="crew section-pad" id="crew">
+    <div class="container">
+      <div class="section-header reveal">
+        <p class="section-label">Ports of Call</p>
+        <h2 class="section-title">The Crew's Network</h2>
+        <div class="section-ornament">⛵</div>
+      </div>
+
+      <!-- ========================================================================== -->
+      <!-- ⚓ >>> [EDIT CREW & SOCIAL PROFILE HYPERLINKS HERE] <<< ⚓                   -->
+      <!-- ========================================================================== -->
+      <div class="crew__grid reveal-stagger">
+        <!-- 🐙 1. GITHUB CARD (Edit href below): -->
+        <a href="https://github.com/ArpitzzKumar" target="_blank" rel="noopener noreferrer" class="crew__card crew__card--github">
+          <div class="crew__card-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" style="color: var(--parchment);">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+          </div>
+          <h3 class="crew__card-name">GitHub</h3>
+          <p class="crew__card-handle">Captain Arpit</p>
+          <p class="crew__card-desc">Where me code treasures be buried. Explore the repositories.</p>
+          <div class="crew__card-arrow">Board Ship →</div>
+        </a>
+
+        <!-- ⚓ 2. LINKEDIN CARD: -->
+        <a href="https://www.linkedin.com/in/arpit-kumar-b3356942b" target="_blank" rel="noopener noreferrer" class="crew__card crew__card--linkedin">
+          <div class="crew__card-icon">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" style="color: #0a66c2;">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </div>
+          <h3 class="crew__card-name">LinkedIn</h3>
+          <p class="crew__card-handle">Captain Arpit</p>
+          <p class="crew__card-desc">The professional harbour. Connect with me crew.</p>
+          <div class="crew__card-arrow">Set Course →</div>
+        </a>
+
+        <!-- 📸 3. INSTAGRAM CARD (Edit href below): -->
+        <a href="https://www.instagram.com/invites/contact/?utm_source=ig_contact_invite&utm_medium=copy_link&utm_content=71c1ulu" target="_blank" rel="noopener noreferrer" class="crew__card crew__card--instagram">
+          <div class="crew__card-icon">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" style="color: #e1306c;">
+              <path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12s.015 3.667.072 4.947c.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24s3.667-.015 4.947-.072c1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.687.072-4.947s-.015-3.667-.072-4.947c-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/>
+            </svg>
+          </div>
+          <h3 class="crew__card-name">Instagram</h3>
+          <p class="crew__card-handle">Captain Arpit</p>
+          <p class="crew__card-desc">A visual logbook of adventures, sunsets, and plundered moments.</p>
+          <div class="crew__card-arrow">View Log →</div>
+        </a>
+
+        <!-- Gmail -->
+        <a href="mailto:arpit.kumar24826@gmail.com" class="crew__card crew__card--gmail">
+          <div class="crew__card-icon">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor" style="color: #ea4335;">
+              <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z"/>
+            </svg>
+          </div>
+          <h3 class="crew__card-name">Gmail</h3>
+          <p class="crew__card-handle">arpit.kumar24826@gmail.com</p>
+          <p class="crew__card-desc">Send a pigeon directly to me cabin. I respond swiftly.</p>
+          <div class="crew__card-arrow">Send Letter →</div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__logo">☠ Captain Arpit</div>
+      <p class="footer__quote">
+        "The seas may be rough, but I am the Captain! No matter how the wind howls, the mountain cannot bow to it."
+      </p>
+      <div class="footer__divider">⚓</div>
+      <p class="footer__copy">&copy; 2026 Captain Arpit. Built with rum, grit, and a fair wind. All rights reserved… or plundered.</p>
+    </div>
+  </footer>
+
+  <!-- ==================== SCRIPTS ==================== -->
+  <!-- Interactive Engine -->
+  <script src="script.js" defer></script>
+</body>
+</html>

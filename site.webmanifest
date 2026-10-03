@@ -1,0 +1,17 @@
+{
+  "name": "Captain Arpit — A Pirate's Tale",
+  "short_name": "Captain Arpit",
+  "description": "Personal log, treasures, voyage roadmap, and pirate code of Captain Arpit.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#090d1a",
+  "theme_color": "#d4a843",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

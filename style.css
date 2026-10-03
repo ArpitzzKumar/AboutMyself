@@ -1,0 +1,1522 @@
+/* ============================================================
+   PIRATES OF THE CARIBBEAN — ABOUT ME THEME
+   ============================================================ */
+
+/* --- Design Tokens --- */
+:root {
+  /* Ocean & Night Sky */
+  --ocean-deep:     #090d1a;
+  --ocean-dark:     #0f1628;
+  --ocean-mid:      #162038;
+  --ocean-surface:  #1b2a4a;
+
+  /* Weathered Wood & Parchment */
+  --wood-dark:      #1a120a;
+  --wood-mid:       #2e1f10;
+  --wood-light:     #4a3420;
+  --parchment:      #e8d5b0;
+  --parchment-dark: #c4a67a;
+  --parchment-light:#f5edda;
+
+  /* Gold & Treasure */
+  --gold:           #d4a843;
+  --gold-bright:    #f0c75e;
+  --gold-dark:      #a07828;
+  --gold-glow:      rgba(212,168,67,0.25);
+
+  /* Blood & Danger */
+  --blood:          #8b1a1a;
+  --blood-bright:   #c0392b;
+
+  /* Text */
+  --text-light:     #e8d5b0;
+  --text-muted:     #9a8a6e;
+  --text-dark:      #2e1f10;
+
+  /* Fonts */
+  --ff-pirate:  'Pirata One', cursive;
+  --ff-cinzel:  'Cinzel Decorative', serif;
+  --ff-heading: 'Cinzel', serif;
+  --ff-body:    'EB Garamond', serif;
+
+  /* Spacing */
+  --sp-xs: 0.5rem;
+  --sp-sm: 1rem;
+  --sp-md: 1.5rem;
+  --sp-lg: 2.5rem;
+  --sp-xl: 4rem;
+  --sp-2xl: 6rem;
+  --sp-3xl: 8rem;
+
+  /* Misc */
+  --radius: 4px;
+  --nav-h: 80px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- Reset --- */
+*, *::before, *::after {
+  margin: 0; padding: 0; box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-h);
+}
+
+body {
+  font-family: var(--ff-body);
+  color: var(--text-light);
+  background: var(--ocean-deep);
+  line-height: 1.8;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+a   { color: inherit; text-decoration: none; }
+ul  { list-style: none; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+
+/* ============================================================
+   ANIMATED BACKGROUND — OCEAN WAVES / PARTICLES
+   ============================================================ */
+#particles-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+/* ============================================================
+   NAVIGATION — Weathered Ship Rail
+   ============================================================ */
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: var(--nav-h);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  transition: all 0.5s var(--ease);
+}
+.nav.scrolled {
+  background: rgba(15,22,40,0.92);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(212,168,67,0.12);
+}
+
+.nav__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav__logo {
+  font-family: var(--ff-pirate);
+  font-size: 1.8rem;
+  color: var(--gold);
+  text-shadow: 0 0 20px rgba(212,168,67,0.3);
+  letter-spacing: 0.05em;
+}
+
+.nav__links {
+  display: flex;
+  gap: var(--sp-lg);
+}
+.nav__links a {
+  font-family: var(--ff-heading);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  transition: color 0.3s, text-shadow 0.3s;
+  position: relative;
+}
+.nav__links a::after {
+  content: '⚓';
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
+  transform: translateX(-50%) scale(0);
+  font-size: 0.6rem;
+  transition: transform 0.3s var(--ease);
+}
+.nav__links a:hover,
+.nav__links a.active {
+  color: var(--gold);
+  text-shadow: 0 0 12px rgba(212,168,67,0.4);
+}
+.nav__links a:hover::after,
+.nav__links a.active::after {
+  transform: translateX(-50%) scale(1);
+}
+
+.nav__hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px;
+  z-index: 1001;
+}
+.nav__hamburger span {
+  display: block;
+  width: 26px;
+  height: 2px;
+  background: var(--gold);
+  transition: all 0.3s var(--ease);
+  transform-origin: center;
+}
+.nav__hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav__hamburger.open span:nth-child(2) { opacity: 0; }
+.nav__hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.nav__mobile {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(9,13,26,0.97);
+  z-index: 999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-lg);
+}
+.nav__mobile.open { display: flex; }
+.nav__mobile a {
+  font-family: var(--ff-pirate);
+  font-size: 2rem;
+  color: var(--gold);
+  transition: text-shadow 0.3s;
+}
+.nav__mobile a:hover {
+  text-shadow: 0 0 20px rgba(212,168,67,0.5);
+}
+
+/* ============================================================
+   HERO — The Grand Voyage
+   ============================================================ */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 650px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero__bg {
+  position: absolute;
+  inset: 0;
+}
+.hero__bg img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  animation: slowDrift 25s ease-in-out infinite alternate;
+}
+@keyframes slowDrift {
+  from { transform: scale(1.05) translateX(0); }
+  to   { transform: scale(1.12) translateX(-2%); }
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 50%, rgba(9,13,26,0.5) 0%, transparent 70%),
+    linear-gradient(180deg, rgba(9,13,26,0.3) 0%, rgba(9,13,26,0.75) 70%, var(--ocean-deep) 100%);
+}
+
+.hero__content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 800px;
+  margin-inline: auto;
+}
+
+.hero__skull {
+  font-size: 3rem;
+  margin-bottom: var(--sp-sm);
+  opacity: 0;
+  animation: fadeIn 1s var(--ease) 0.2s forwards;
+  filter: drop-shadow(0 0 20px rgba(212,168,67,0.3));
+}
+
+.hero__subtitle-top {
+  font-family: var(--ff-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: var(--sp-sm);
+  opacity: 0;
+  animation: fadeUp 0.8s var(--ease) 0.4s forwards;
+}
+
+.hero__title {
+  font-family: var(--ff-pirate);
+  font-size: clamp(3rem, 8vw, 7rem);
+  color: var(--parchment);
+  line-height: 1.05;
+  text-shadow:
+    0 2px 8px rgba(0,0,0,0.6),
+    0 0 40px rgba(212,168,67,0.15);
+  margin-bottom: var(--sp-md);
+  opacity: 0;
+  animation: fadeUp 0.8s var(--ease) 0.6s forwards;
+}
+
+.hero__tagline {
+  font-family: var(--ff-body);
+  font-size: 1.2rem;
+  font-style: italic;
+  color: var(--text-muted);
+  max-width: 550px;
+  margin-inline: auto;
+  margin-bottom: var(--sp-xl);
+  opacity: 0;
+  animation: fadeUp 0.8s var(--ease) 0.8s forwards;
+}
+
+.hero__actions {
+  display: flex;
+  gap: var(--sp-sm);
+  justify-content: center;
+  flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.8s var(--ease) 1s forwards;
+}
+
+/* Scroll indicator */
+.hero__scroll {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: fadeIn 1s var(--ease) 1.5s forwards;
+}
+.hero__scroll span {
+  font-family: var(--ff-heading);
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.hero__scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(0.5); }
+  50%      { opacity: 1;   transform: scaleY(1);    }
+}
+
+/* ============================================================
+   BUTTONS — Pirate Style
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 34px;
+  font-family: var(--ff-heading);
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border-radius: var(--radius);
+  transition: all 0.3s var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-bright));
+  color: var(--wood-dark);
+  box-shadow: 0 4px 20px rgba(212,168,67,0.3);
+}
+.btn-gold:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(212,168,67,0.5);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--gold);
+  border: 1.5px solid rgba(212,168,67,0.4);
+}
+.btn-outline:hover {
+  background: rgba(212,168,67,0.1);
+  border-color: var(--gold);
+  transform: translateY(-3px);
+}
+
+.btn svg {
+  width: 14px; height: 14px;
+  transition: transform 0.3s var(--ease);
+}
+.btn:hover svg { transform: translateX(4px); }
+
+/* ============================================================
+   SECTION HEADERS
+   ============================================================ */
+.section-header {
+  text-align: center;
+  margin-bottom: var(--sp-2xl);
+}
+
+.section-label {
+  font-family: var(--ff-heading);
+  font-weight: 600;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: var(--sp-xs);
+}
+
+.section-title {
+  font-family: var(--ff-pirate);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  color: var(--parchment);
+  text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  margin-bottom: var(--sp-sm);
+}
+
+.section-ornament {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: var(--gold-dark);
+  font-size: 0.9rem;
+}
+.section-ornament::before,
+.section-ornament::after {
+  content: '';
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-dark), transparent);
+}
+
+.section-pad {
+  padding-block: var(--sp-3xl);
+  position: relative;
+  z-index: 1;
+}
+
+/* ============================================================
+   ABOUT — The Captain's Quarters
+   ============================================================ */
+.about {
+  background:
+    linear-gradient(180deg, var(--ocean-deep) 0%, var(--ocean-dark) 50%, var(--ocean-deep) 100%);
+}
+
+.about__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: var(--sp-3xl);
+  align-items: center;
+}
+
+.about__img-wrapper {
+  position: relative;
+}
+.about__img-wrapper img {
+  border-radius: var(--radius);
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.5),
+    inset 0 0 0 1px rgba(212,168,67,0.1);
+}
+/* Decorative compass rose corner */
+.about__img-wrapper::before {
+  content: '⚜';
+  position: absolute;
+  top: -18px;
+  left: -18px;
+  font-size: 2.2rem;
+  color: var(--gold);
+  opacity: 0.25;
+  text-shadow: 0 0 20px rgba(212,168,67,0.3);
+}
+.about__img-wrapper::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  right: -12px;
+  width: 140px;
+  height: 140px;
+  border: 1px solid rgba(212,168,67,0.15);
+  border-radius: var(--radius);
+  z-index: -1;
+}
+
+.about__text-group h2 {
+  font-family: var(--ff-pirate);
+  font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+  color: var(--parchment);
+  margin-bottom: var(--sp-xs);
+}
+
+.about__quote {
+  font-family: var(--ff-body);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--gold);
+  border-left: 3px solid var(--gold-dark);
+  padding-left: var(--sp-md);
+  margin-bottom: var(--sp-md);
+}
+
+.about__bio {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin-bottom: var(--sp-lg);
+  line-height: 1.9;
+}
+
+.about__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-sm);
+  margin-bottom: var(--sp-lg);
+}
+
+.about__stat {
+  text-align: center;
+  padding: var(--sp-md);
+  background: rgba(212,168,67,0.04);
+  border: 1px solid rgba(212,168,67,0.08);
+  border-radius: var(--radius);
+  transition: all 0.3s var(--ease);
+}
+.about__stat:hover {
+  border-color: rgba(212,168,67,0.2);
+  background: rgba(212,168,67,0.08);
+  transform: translateY(-4px);
+}
+
+.about__stat-number {
+  font-family: var(--ff-pirate);
+  font-size: 2rem;
+  color: var(--gold);
+  line-height: 1;
+}
+
+.about__stat-label {
+  font-family: var(--ff-heading);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+/* ============================================================
+   SKILLS / TREASURE — The Loot
+   ============================================================ */
+.skills {
+  background:
+    linear-gradient(180deg, var(--ocean-deep) 0%, var(--wood-dark) 50%, var(--ocean-deep) 100%);
+}
+
+.skills__intro {
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto var(--sp-xl);
+  color: var(--text-muted);
+  font-size: 1.05rem;
+}
+
+.skills__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-md);
+}
+
+.skill-card {
+  background:
+    linear-gradient(145deg, rgba(46,31,16,0.6), rgba(26,18,10,0.8));
+  border: 1px solid rgba(212,168,67,0.08);
+  border-radius: var(--radius);
+  padding: var(--sp-lg);
+  text-align: center;
+  transition: all 0.4s var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+.skill-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.skill-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(212,168,67,0.2);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.4), 0 0 30px rgba(212,168,67,0.06);
+}
+.skill-card:hover::before { opacity: 1; }
+
+.skill-card__icon {
+  font-size: 2.5rem;
+  margin-bottom: var(--sp-sm);
+  filter: drop-shadow(0 0 8px rgba(212,168,67,0.3));
+}
+
+.skill-card__title {
+  font-family: var(--ff-heading);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  color: var(--parchment);
+  margin-bottom: var(--sp-xs);
+}
+
+.skill-card__desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: var(--sp-md);
+}
+
+/* Skill bar */
+.skill-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(212,168,67,0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.skill-bar__fill {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--gold-dark), var(--gold-bright));
+  width: 0;
+  transition: width 1.5s var(--ease);
+}
+
+/* ============================================================
+   VOYAGE — Timeline (The Captain's Log)
+   ============================================================ */
+.voyage {
+  background:
+    linear-gradient(180deg, var(--ocean-deep) 0%, var(--ocean-dark) 100%);
+}
+
+.voyage__parallax {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+.voyage__parallax img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.06;
+}
+
+.timeline {
+  position: relative;
+  max-width: 800px;
+  margin-inline: auto;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 32px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, transparent, var(--gold-dark) 10%, var(--gold-dark) 90%, transparent);
+}
+
+.timeline__item {
+  display: flex;
+  gap: var(--sp-lg);
+  margin-bottom: var(--sp-xl);
+  position: relative;
+}
+
+.timeline__marker {
+  position: relative;
+  flex-shrink: 0;
+  width: 64px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 4px;
+}
+.timeline__marker-dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--ocean-deep);
+  border: 2px solid var(--gold-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+  transition: all 0.3s var(--ease);
+}
+.timeline__marker-dot::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0.6;
+}
+.timeline__item:hover .timeline__marker-dot {
+  background: var(--gold);
+  box-shadow: 0 0 20px rgba(212,168,67,0.4);
+}
+.timeline__item:hover .timeline__marker-dot::after {
+  background: var(--ocean-deep);
+}
+
+.timeline__content {
+  background: rgba(22,32,56,0.5);
+  border: 1px solid rgba(212,168,67,0.08);
+  border-radius: var(--radius);
+  padding: var(--sp-lg);
+  flex: 1;
+  transition: all 0.3s var(--ease);
+}
+.timeline__item:hover .timeline__content {
+  border-color: rgba(212,168,67,0.2);
+  background: rgba(22,32,56,0.7);
+}
+
+.timeline__year {
+  font-family: var(--ff-pirate);
+  font-size: 1.4rem;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+
+.timeline__event-title {
+  font-family: var(--ff-heading);
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--parchment);
+  margin-bottom: var(--sp-xs);
+}
+
+.timeline__event-desc {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ============================================================
+   TREASURES — Gallery / Interests
+   ============================================================ */
+.treasures {
+  background: var(--wood-dark);
+  position: relative;
+  overflow: hidden;
+}
+.treasures::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 40px,
+      rgba(0,0,0,0.1) 40px,
+      rgba(0,0,0,0.1) 42px
+    );
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.treasures__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-md);
+}
+
+.treasure-card {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  cursor: pointer;
+  aspect-ratio: 4 / 3;
+}
+.treasure-card img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease);
+}
+.treasure-card:hover img {
+  transform: scale(1.1);
+}
+
+.treasure-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(9,13,26,0.9) 0%, rgba(9,13,26,0.2) 50%, transparent);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--sp-md);
+  opacity: 0;
+  transition: opacity 0.3s var(--ease);
+}
+.treasure-card:hover .treasure-card__overlay { opacity: 1; }
+
+.treasure-card__tag {
+  font-family: var(--ff-heading);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 4px;
+}
+.treasure-card__name {
+  font-family: var(--ff-pirate);
+  font-size: 1.3rem;
+  color: var(--parchment);
+}
+
+/* ============================================================
+   PIRATE CODE — Fun Facts / Values
+   ============================================================ */
+.code {
+  background:
+    linear-gradient(180deg, var(--ocean-deep), var(--ocean-dark), var(--ocean-deep));
+}
+
+.code__scroll {
+  max-width: 700px;
+  margin-inline: auto;
+  background:
+    linear-gradient(145deg, rgba(232,213,176,0.06), rgba(196,166,122,0.03));
+  border: 1px solid rgba(212,168,67,0.12);
+  border-radius: var(--radius);
+  padding: var(--sp-xl) var(--sp-2xl);
+  position: relative;
+}
+.code__scroll::before,
+.code__scroll::after {
+  content: '☠';
+  position: absolute;
+  font-size: 1.5rem;
+  color: var(--gold-dark);
+  opacity: 0.3;
+}
+.code__scroll::before { top: 20px; left: 24px; }
+.code__scroll::after  { bottom: 20px; right: 24px; }
+
+.code__list {
+  counter-reset: pirate-code;
+}
+.code__item {
+  counter-increment: pirate-code;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-md);
+  padding: var(--sp-md) 0;
+  border-bottom: 1px solid rgba(212,168,67,0.06);
+  transition: all 0.3s var(--ease);
+}
+.code__item:last-child { border-bottom: none; }
+.code__item:hover {
+  padding-left: var(--sp-sm);
+}
+
+.code__number {
+  font-family: var(--ff-pirate);
+  font-size: 1.6rem;
+  color: var(--gold-dark);
+  line-height: 1;
+  min-width: 40px;
+}
+.code__number::before {
+  content: counter(pirate-code, upper-roman);
+}
+
+.code__text {
+  font-size: 1rem;
+  color: var(--text-light);
+  line-height: 1.7;
+}
+.code__text strong {
+  font-family: var(--ff-heading);
+  font-weight: 700;
+  color: var(--parchment);
+}
+
+/* ============================================================
+   MAP NAVIGATION — Interactive Treasure Map
+   ============================================================ */
+.mapnav {
+  background:
+    linear-gradient(180deg, var(--ocean-deep) 0%, var(--wood-dark) 50%, var(--ocean-deep) 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.mapnav__wrapper {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.6),
+    0 0 0 1px rgba(212,168,67,0.1),
+    0 0 80px rgba(212,168,67,0.06);
+}
+
+.mapnav__img {
+  width: 100%;
+  display: block;
+  filter: sepia(0.15) contrast(1.05);
+}
+
+/* Hotspot markers */
+.mapnav__hotspot {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  z-index: 5;
+  text-decoration: none;
+  transition: transform 0.3s var(--ease);
+}
+.mapnav__hotspot:hover {
+  transform: scale(1.15);
+  z-index: 10;
+}
+
+.mapnav__beacon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--gold-bright), var(--gold-dark));
+  box-shadow:
+    0 0 10px rgba(212,168,67,0.6),
+    0 0 30px rgba(212,168,67,0.25);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mapnav__beacon::before {
+  content: '';
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px solid rgba(212,168,67,0.4);
+  animation: beaconPulse 2s ease-in-out infinite;
+}
+.mapnav__beacon::after {
+  content: '';
+  position: absolute;
+  inset: -14px;
+  border-radius: 50%;
+  border: 1px solid rgba(212,168,67,0.15);
+  animation: beaconPulse 2s ease-in-out 0.4s infinite;
+}
+
+@keyframes beaconPulse {
+  0%, 100% { transform: scale(1);   opacity: 0.6; }
+  50%      { transform: scale(1.4); opacity: 0;   }
+}
+
+.mapnav__beacon-icon {
+  font-size: 0.55rem;
+  position: relative;
+  z-index: 1;
+}
+
+.mapnav__label {
+  margin-top: 6px;
+  padding: 4px 10px;
+  background: rgba(9,13,26,0.88);
+  border: 1px solid rgba(212,168,67,0.25);
+  border-radius: 4px;
+  font-family: var(--ff-heading);
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.25s, transform 0.25s var(--ease);
+  pointer-events: none;
+}
+.mapnav__hotspot:hover .mapnav__label {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Connector lines (decorative) */
+.mapnav__legend {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--sp-sm);
+  margin-top: var(--sp-lg);
+}
+.mapnav__legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(212,168,67,0.05);
+  border: 1px solid rgba(212,168,67,0.1);
+  border-radius: var(--radius);
+  font-family: var(--ff-heading);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s var(--ease);
+}
+.mapnav__legend-item:hover {
+  background: rgba(212,168,67,0.12);
+  border-color: rgba(212,168,67,0.3);
+  color: var(--gold);
+  transform: translateY(-2px);
+}
+.mapnav__legend-item span {
+  font-size: 0.9rem;
+}
+
+/* ============================================================
+   CREW'S NETWORK — Social Links Section
+   ============================================================ */
+.crew {
+  background:
+    linear-gradient(180deg, var(--ocean-deep), var(--ocean-dark), var(--ocean-deep));
+}
+
+.crew__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-md);
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+.crew__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--sp-xl) var(--sp-md);
+  background:
+    linear-gradient(145deg, rgba(22,32,56,0.6), rgba(15,22,40,0.8));
+  border: 1px solid rgba(212,168,67,0.06);
+  border-radius: var(--radius);
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s var(--ease);
+}
+.crew__card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.crew__card:hover {
+  transform: translateY(-10px);
+  border-color: rgba(212,168,67,0.2);
+  box-shadow:
+    0 20px 50px rgba(0,0,0,0.4),
+    0 0 40px rgba(212,168,67,0.06);
+}
+.crew__card:hover::before { opacity: 1; }
+
+.crew__card-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  margin-bottom: var(--sp-md);
+  transition: transform 0.4s var(--ease), box-shadow 0.4s;
+}
+.crew__card:hover .crew__card-icon {
+  transform: scale(1.1) rotate(-5deg);
+}
+
+/* Unique colors per platform */
+.crew__card--github .crew__card-icon {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+}
+.crew__card--github:hover .crew__card-icon {
+  background: rgba(255,255,255,0.12);
+  box-shadow: 0 0 30px rgba(255,255,255,0.1);
+}
+
+.crew__card--linkedin .crew__card-icon {
+  background: rgba(10,102,194,0.1);
+  border: 1px solid rgba(10,102,194,0.2);
+}
+.crew__card--linkedin:hover .crew__card-icon {
+  background: rgba(10,102,194,0.2);
+  box-shadow: 0 0 30px rgba(10,102,194,0.15);
+}
+
+.crew__card--instagram .crew__card-icon {
+  background: rgba(225,48,108,0.1);
+  border: 1px solid rgba(225,48,108,0.2);
+}
+.crew__card--instagram:hover .crew__card-icon {
+  background: rgba(225,48,108,0.2);
+  box-shadow: 0 0 30px rgba(225,48,108,0.15);
+}
+
+.crew__card--gmail .crew__card-icon {
+  background: rgba(234,67,53,0.1);
+  border: 1px solid rgba(234,67,53,0.2);
+}
+.crew__card--gmail:hover .crew__card-icon {
+  background: rgba(234,67,53,0.2);
+  box-shadow: 0 0 30px rgba(234,67,53,0.15);
+}
+
+.crew__card-name {
+  font-family: var(--ff-heading);
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  color: var(--parchment);
+  margin-bottom: 4px;
+}
+
+.crew__card-handle {
+  font-family: var(--ff-body);
+  font-size: 0.85rem;
+  color: var(--gold);
+  margin-bottom: var(--sp-sm);
+}
+
+.crew__card-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.crew__card-arrow {
+  margin-top: var(--sp-sm);
+  font-family: var(--ff-heading);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.3s, gap 0.3s var(--ease);
+}
+.crew__card:hover .crew__card-arrow {
+  color: var(--gold);
+  gap: 10px;
+}
+
+/* ============================================================
+   CONTACT — Send a Message in a Bottle
+   ============================================================ */
+.contact {
+  background:
+    linear-gradient(180deg, var(--ocean-deep), var(--ocean-mid), var(--ocean-deep));
+  position: relative;
+  overflow: hidden;
+}
+
+.contact__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.contact__bg img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0.08;
+}
+
+.contact__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-3xl);
+  align-items: start;
+}
+
+.contact__info h2 {
+  font-family: var(--ff-pirate);
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+  color: var(--parchment);
+  margin-bottom: var(--sp-sm);
+}
+
+.contact__info-text {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-bottom: var(--sp-xl);
+}
+
+.contact__detail {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: var(--sp-md);
+}
+.contact__detail-icon {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: rgba(212,168,67,0.08);
+  border: 1px solid rgba(212,168,67,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+.contact__detail-label {
+  font-family: var(--ff-heading);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.contact__detail-value {
+  color: var(--text-light);
+  font-size: 0.95rem;
+}
+
+.contact__socials {
+  display: flex;
+  gap: 12px;
+  margin-top: var(--sp-xl);
+}
+.contact__social {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(212,168,67,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  transition: all 0.3s var(--ease);
+}
+.contact__social:hover {
+  background: var(--gold);
+  border-color: var(--gold);
+  transform: translateY(-3px);
+}
+
+/* Contact Form */
+.contact__form {
+  background: rgba(15,22,40,0.6);
+  border: 1px solid rgba(212,168,67,0.1);
+  border-radius: var(--radius);
+  padding: var(--sp-xl);
+  backdrop-filter: blur(10px);
+}
+
+.form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-sm);
+}
+.form__group {
+  margin-bottom: var(--sp-md);
+}
+.form__label {
+  display: block;
+  font-family: var(--ff-heading);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+.form__input,
+.form__textarea {
+  width: 100%;
+  padding: 14px 16px;
+  font-family: var(--ff-body);
+  font-size: 0.95rem;
+  color: var(--text-light);
+  background: rgba(9,13,26,0.6);
+  border: 1px solid rgba(212,168,67,0.1);
+  border-radius: var(--radius);
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.form__input::placeholder,
+.form__textarea::placeholder {
+  color: rgba(154,138,110,0.5);
+}
+.form__input:focus,
+.form__textarea:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(212,168,67,0.1);
+}
+.form__textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+.form__submit {
+  width: 100%;
+  justify-content: center;
+}
+
+.form__success {
+  display: none;
+  text-align: center;
+  padding: var(--sp-xl);
+}
+.form__success.show { display: block; }
+.form__success-icon {
+  font-size: 3rem;
+  margin-bottom: var(--sp-sm);
+}
+.form__success h3 {
+  font-family: var(--ff-pirate);
+  font-size: 1.5rem;
+  color: var(--gold);
+  margin-bottom: var(--sp-xs);
+}
+.form__success p {
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   FOOTER — The Jolly Roger flies
+   ============================================================ */
+.footer {
+  background: var(--ocean-deep);
+  border-top: 1px solid rgba(212,168,67,0.08);
+  padding: var(--sp-xl) 0 var(--sp-lg);
+  position: relative;
+  z-index: 1;
+}
+
+.footer__inner {
+  text-align: center;
+}
+
+.footer__logo {
+  font-family: var(--ff-pirate);
+  font-size: 2rem;
+  color: var(--gold);
+  margin-bottom: var(--sp-sm);
+}
+
+.footer__quote {
+  font-family: var(--ff-body);
+  font-style: italic;
+  font-size: 1rem;
+  color: var(--text-muted);
+  max-width: 500px;
+  margin: 0 auto var(--sp-lg);
+}
+
+.footer__divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: var(--sp-md);
+  color: var(--gold-dark);
+  opacity: 0.4;
+}
+.footer__divider::before,
+.footer__divider::after {
+  content: '';
+  width: 80px;
+  height: 1px;
+  background: var(--gold-dark);
+}
+
+.footer__copy {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   ANIMATIONS
+   ============================================================ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+}
+.reveal-stagger.visible > *:nth-child(1) { transition-delay: 0.05s; }
+.reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.12s; }
+.reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.19s; }
+.reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.26s; }
+.reveal-stagger.visible > *:nth-child(5) { transition-delay: 0.33s; }
+.reveal-stagger.visible > *:nth-child(6) { transition-delay: 0.40s; }
+.reveal-stagger.visible > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-stagger:not(.visible) > * {
+  opacity: 0;
+  transform: translateY(25px);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 1024px) {
+  .skills__grid { grid-template-columns: repeat(2, 1fr); }
+  .crew__grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  :root { --nav-h: 66px; --sp-3xl: 5rem; }
+
+  .nav__links { display: none; }
+  .nav__hamburger { display: flex; }
+
+  .about__grid { grid-template-columns: 1fr; gap: var(--sp-xl); }
+  .about__stats { grid-template-columns: repeat(3, 1fr); }
+
+  .skills__grid { grid-template-columns: 1fr; }
+  .treasures__grid { grid-template-columns: 1fr 1fr; }
+
+  .timeline::before { left: 18px; }
+  .timeline__marker { width: 36px; }
+
+  .contact__inner { grid-template-columns: 1fr; gap: var(--sp-xl); }
+  .form__row { grid-template-columns: 1fr; }
+
+  .code__scroll { padding: var(--sp-lg) var(--sp-md); }
+
+  .crew__grid { grid-template-columns: 1fr; max-width: 400px; }
+
+  /* Map: show labels always on mobile since no hover */
+  .mapnav__label {
+    opacity: 1;
+    transform: translateY(0);
+    font-size: 0.5rem;
+    padding: 3px 6px;
+  }
+  .mapnav__beacon { width: 16px; height: 16px; }
+}
+
+@media (max-width: 480px) {
+  .hero__actions { flex-direction: column; align-items: center; }
+  .hero__actions .btn { width: 100%; justify-content: center; }
+  .about__stats { grid-template-columns: 1fr; }
+  .treasures__grid { grid-template-columns: 1fr; }
+}
+
+
+/* ============================================================
+   SELECTION & ACCESSIBILITY ENHANCEMENTS
+   ============================================================ */
+::selection {
+  background: var(--gold);
+  color: var(--wood-dark);
+}
+
+::-moz-selection {
+  background: var(--gold);
+  color: var(--wood-dark);
+}
+
+/* Custom Pirate Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--ocean-deep);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--wood-light);
+  border: 1px solid var(--gold-dark);
+  border-radius: var(--radius);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-dark);
+}
+
+/* Accessible focus visible states */
+:focus-visible {
+  outline: 2px dashed var(--gold);
+  outline-offset: 4px;
+}
+
+/* Prefers Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
